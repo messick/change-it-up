@@ -7,20 +7,26 @@ class ConvertController < ApplicationController
     re = /(http:|https:)\/([^\/])/
     uri.gsub!(re, "\\1//\\2")
 
-    begin
-      image = MiniMagick::Image.open uri
-      @conversion = Conversion.new(:width => params[:width].to_i,
-                      :height => params[:height].to_i,
-                      :conv_type => params[:conv_type],
-                      :image => image)
+    # set our instance vars
+    @image = Conversion.find_or_create_by_url(uri)
+    @image.width = params[:width]
+    @image.height = params[:height]
+    @image.crop_type = params[:crop_type]
 
-      # Check for validation errors that may have failed the conversion
-      @conversion.valid?
-      flash[:alert] = @conversion.errors.full_messages
+    # if we have a public id, we've already uploaded this image
+    # in the past, no need to do it again.
+    if @image.public_id.nil?
+      begin
+        image = MiniMagick::Image.open uri
 
-    rescue OpenURI::HTTPError
-      # tell the user their image wasn't good enough
-      flash[:alert] = 'Image not found, pleae check URL.'
+        cloud_image = Cloudinary::Uploader.upload(image.path)
+        @image.public_id = cloud_image["public_id"]
+        @image.format = cloud_image["format"]
+        @image.save!
+      rescue OpenURI::HTTPError
+        # tell the user their image wasn't good enough
+        flash[:alert] = 'Image not found, pleae check URL.'
+      end
     end
 
     render template: 'convert/show',

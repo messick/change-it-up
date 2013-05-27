@@ -1,1 +1,1 @@
-= image_tag @conversion.image.url unless @conversion.nil?
+= cl_image_tag(@image.public_id, :format => @image.format, :width => @image.width, :height => @image.height, :crop => @image.crop_type) unless @image.nil?

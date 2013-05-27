@@ -11,10 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130527201013) do
+ActiveRecord::Schema.define(:version => 20130527221556) do
 
   create_table "conversions", :force => true do |t|
-    t.string "image"
+    t.string "url"
+    t.string "public_id"
+    t.string "format"
   end
 
 end

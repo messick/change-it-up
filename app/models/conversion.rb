@@ -1,15 +1,14 @@
 class Conversion < ActiveRecord::Base
 
   attr_accessor :width,
-    :height, :conv_type
+    :height, :crop_type
 
   attr_accessible :conv_type, :height, :image, :width
-  mount_uploader :image, ImageUploader
 
   with_options :presence => true do |inner|
-    inner.validates :conv_type
+    inner.validates :crop_type
     inner.validates :height
-    inner.validates :image
+    inner.validates :url
     inner.validates :width
   end
 
