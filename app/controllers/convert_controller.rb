@@ -8,10 +8,13 @@ class ConvertController < ApplicationController
     # We need to put it back
     re = /(http:|https:)\/([^\/])/
     uri.gsub!(re, "\\1//\\2")
+    image = MiniMagick::Image.open uri
 
-    @file = Net::HTTP.get(URI(uri))
+    @conversion = Conversion.new(:width => params[:width].to_i,
+                    :height => params[:height].to_i,
+                    :conv_type => params[:conv_type],
+                    :image => image)
 
-    binding.pry
     render template: 'convert/show',
       handlers: [:haml],
       formats:  [:html]
