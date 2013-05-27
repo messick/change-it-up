@@ -1,4 +1,5 @@
 ChangeItUp::Application.routes.draw do
+  match '*url' => 'convert#show'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

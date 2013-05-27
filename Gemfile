@@ -1,12 +1,15 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.12'
+gem 'haml-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
 
+gem 'carrierwave'
+gem 'mini_magick'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -22,17 +25,16 @@ end
 
 gem 'jquery-rails'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+group :test, :development do
+  gem 'rspec-rails', '~> 2.0'
+  gem 'database_cleaner', '0.8.0'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
+  # Generating faked data or objects
+  gem 'factory_girl_rails', '4.1.0'
+  gem 'faker', '1.1.1'
 
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
+  # Pry for debug
+  gem 'pry-rails', '0.2.2'
+  gem 'pry-debugger', '0.2.1'
+  gem 'pry-remote', '0.1.6' # connect to pry remotely when running foreman
+end
