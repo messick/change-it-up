@@ -84,6 +84,7 @@ GEM
     mini_magick (3.6.0)
       subexec (~> 0.2.1)
     multi_json (1.7.4)
+    pg (0.15.1)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -172,6 +173,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   mini_magick
+  pg
   pry-debugger (= 0.2.1)
   pry-rails (= 0.2.2)
   pry-remote (= 0.1.6)
