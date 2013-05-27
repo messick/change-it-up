@@ -9,4 +9,21 @@
   %body
     .container
       %h1 Change It Up!
-    = yield
+      #flash-notice.clearfix
+        = bootstrap_flash
+      = yield
+
+      %h4 Required Parameters:
+      .width
+        width:
+        %span.example width=100
+      .height
+        height:
+        %span.example height=100
+
+      %h3 Optional Parameter:
+      .conv_type
+        conv_type:
+        %span.example conv_type=resize
+        Or
+        %span.example conv_type=crop
