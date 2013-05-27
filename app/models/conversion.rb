@@ -1,5 +1,8 @@
-class Conversion
-  mount_uploader :image, ImageUploader
+class Conversion < ActiveRecord::Base
 
-  attr_accessor :image
+  attr_accessor :width,
+    :height, :conv_type
+
+  attr_accessible :conv_type, :height, :image, :width
+  mount_uploader :image, ImageUploader
 end
