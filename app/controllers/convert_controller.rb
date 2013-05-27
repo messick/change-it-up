@@ -13,19 +13,26 @@ class ConvertController < ApplicationController
     @image.height = params[:height]
     @image.crop_type = params[:crop_type]
 
-    # if we have a public id, we've already uploaded this image
-    # in the past, no need to do it again.
-    if @image.public_id.nil?
-      begin
-        image = MiniMagick::Image.open uri
+    # make sure we have all the correct params, otherwise add errors
+    # and skip to render
+    unless @image.valid?
+      flash[:alert] = @image.errors.full_messages
+      @image = nil # don't want to show a  prevously loaded image if there are errors
+    else
+      # if we have a public id, we've already uploaded this image
+      # in the past, no need to do it again.
+      if @image.public_id.nil?
+        begin
+          image = MiniMagick::Image.open uri
 
-        cloud_image = Cloudinary::Uploader.upload(image.path)
-        @image.public_id = cloud_image["public_id"]
-        @image.format = cloud_image["format"]
-        @image.save!
-      rescue OpenURI::HTTPError
-        # tell the user their image wasn't good enough
-        flash[:alert] = 'Image not found, pleae check URL.'
+          cloud_image = Cloudinary::Uploader.upload(image.path)
+          @image.public_id = cloud_image["public_id"]
+          @image.format = cloud_image["format"]
+          @image.save!
+        rescue OpenURI::HTTPError
+          # tell the user their image wasn't good enough
+          flash[:alert] = 'Image not found, pleae check URL.'
+        end
       end
     end
 
