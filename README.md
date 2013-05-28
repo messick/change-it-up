@@ -6,8 +6,7 @@
 To convert an image by passing the URL of the image and
 conversion options in the brower's URL box.
 
-Example:
-http://change-it-up.herokuapp.com/http://example.com/image.png?width=100&height=100&crop_type=fill
+Example: http://change-it-up.herokuapp.com/http://change-it-up.herokuapp.com/assets/test.jpg?width=500&height=500&crop_type=fit
 
 ## Technical Details
 
