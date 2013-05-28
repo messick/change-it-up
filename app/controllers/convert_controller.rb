@@ -16,7 +16,7 @@ class ConvertController < ApplicationController
     # make sure we have all the correct params, otherwise add errors
     # and skip to render
     unless @image.valid?
-      flash[:alert] = @image.errors.full_messages
+      flash.now[:alert] = @image.errors.full_messages
       @image = nil # don't want to show a  prevously loaded image if there are errors
     else
       # if we have a public id, we've already uploaded this image
@@ -31,7 +31,7 @@ class ConvertController < ApplicationController
           @image.save!
         rescue OpenURI::HTTPError
           # tell the user their image wasn't good enough
-          flash[:alert] = 'Image not found, pleae check URL.'
+          flash.now[:alert] = 'Image not found, pleae check URL.'
         end
       end
     end
