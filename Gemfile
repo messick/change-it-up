@@ -46,3 +46,24 @@ group :test, :development do
   gem 'pry-debugger', '0.2.1'
   gem 'pry-remote', '0.1.6' # connect to pry remotely when running foreman
 end
+
+group :test do
+  gem 'capybara', '2.0.2'
+  gem 'capybara-webkit', '0.14.2'
+  gem 'shoulda-matchers', '2.0.0'
+end
+
+group :development do
+  # Use Guard + Addons for automated test runs
+  gem 'guard', '1.7.0'
+  gem 'guard-rspec', '1.2.1'
+  gem 'guard-spork', '1.5.0'
+  gem 'growl', '1.0.3'
+  gem 'rb-fsevent', '~> 0.9.1' # guard dependency
+
+  gem 'quiet_assets', '1.0.1' # supress log entries for assets in dev
+
+  # better error pages in dev
+  gem 'better_errors', '0.3.2'
+  gem 'binding_of_caller', '0.6.8'
+end
